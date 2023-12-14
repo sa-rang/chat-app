@@ -1,19 +1,26 @@
-<script setup>
-import ChatForm from './components/ChatForm.vue'
-import ChatListin from './components/ChatListing.vue'
-</script>
+
 
 <template>
   <header>
     <div class="wrapper">
-      <ChatForm msg="Chat Application!" />
+      <h1>Chat Application</h1>
     </div>
   </header>
 
   <main>
-    <ChatListin />
+    <ChatBox v-if="selectedParticipant" />
+    <ParticipantList />
   </main>
 </template>
+
+<script setup>
+import { computed } from 'vue';
+import ChatBox from "./components/ChatBox.vue"
+import ParticipantList from './components/ParticipantList.vue';
+import { useChatStore } from './stores/chats'
+const chatStore = useChatStore()
+const selectedParticipant = computed(() => chatStore.selectedParticipant);
+</script>
 
 <style scoped>
 header {
