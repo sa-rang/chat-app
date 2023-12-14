@@ -56,15 +56,19 @@ watch(selectedParticipant, async (newValue, oldValue) => {
 })
 
 const sendMessage = () => {
-  chatStore.addChat({ chatId: self.value.id + selectedParticipant.value.id, msgId: generateId(), participant: self.value.id, msg: participant1Msg.value })
-  participant1Msg.value = ""
-  setScrollBottom()
+  if (participant1Msg.value) {
+    chatStore.addChat({ chatId: self.value.id + selectedParticipant.value.id, msgId: generateId(), participant: self.value.id, msg: participant1Msg.value })
+    participant1Msg.value = ""
+    setScrollBottom()
+  }
 }
 
 const sendMockMessage = () => {
-  chatStore.addChat({ chatId: self.value.id + selectedParticipant.value.id, msgId: generateId(), participant: selectedParticipant.value.id, msg: participant2Msg.value })
-  participant2Msg.value = ""
-  setScrollBottom()
+  if (participant2Msg.value) {
+    chatStore.addChat({ chatId: self.value.id + selectedParticipant.value.id, msgId: generateId(), participant: selectedParticipant.value.id, msg: participant2Msg.value })
+    participant2Msg.value = ""
+    setScrollBottom()
+  }
 }
 
 onMounted(() => {
